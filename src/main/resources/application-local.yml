@@ -1,0 +1,40 @@
+spring:
+  sql:
+    init:
+      mode: always
+  application:
+    name: delivery
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:33306/delivery
+    username: root
+    password: 1234
+
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: validate # create-drop, update, none(배포시), validate(개발시), create
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+
+# MyBatis
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.food.delivery
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    default-fetch-size: 50
+    default-statement-timeout: 30
+
+server:
+  port: 8080
+

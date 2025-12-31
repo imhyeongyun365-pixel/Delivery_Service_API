@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.food.delivery.menu.mapper.MenuMapper">
+
+    <select id="findMenusByStore"
+            parameterType="long"
+            resultType="com.food.delivery.menu.entity.MenuResponse">
+
+        SELECT
+            m.menu_id,
+            m.name,
+            m.price,
+            c.category_name
+        FROM menu m
+        LEFT JOIN category c
+            ON m.category_id = c.category_id
+        WHERE m.store_id = #{storeId}
+
+    </select>
+
+</mapper>
